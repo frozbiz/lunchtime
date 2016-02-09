@@ -1,0 +1,16 @@
+h1 Welcome to Lunchtime
+h2 The best lunch organizing tool at Sonos.
+
+- unless current_user
+  .welcome
+    | To use LunchTime you must become a member.
+    .login-links
+      .sign-up.button
+        = link_to "Sign In", new_user_session_path
+      .sign_in.button
+        = link_to "Sign Up", new_user_registration_path
+- else
+  .welcome
+    = "Welcome #{current_user.email}. Are you hungry?"
+  .signout.button
+    = link_to "Sign Out", destroy_user_session_path, :method => :delete
