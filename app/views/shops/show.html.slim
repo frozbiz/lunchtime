@@ -1,0 +1,34 @@
+h1 Welcome to Lunchtime
+h2 The best lunch organizing tool at Sonos.
+
+h3 Restaurant details
+
+.shop
+    .shop-name Name: #{@shop.name}
+    .shop-address Address: #{@shop.address}
+    / TODO render this as a price-range number of dollar signs
+    - if @shop.avg_price.nil?
+        - avg_price = 0.0
+    - else
+        - avg_price = @shop.avg_price
+    .shop-price Average price: #{avg_price}
+    - if @shop.avg_rating.nil?
+        - avg_rating = 0.0
+    - else
+        - avg_rating = @shop.avg_rating
+    .shop-rating Average rating: #{avg_rating} / 5.0
+    - if user_signed_in?
+        - user_rating = @shop.ratings.where(:user_id => current_user.id)
+        - if user_rating.empty?
+            .shop-user-rating
+                | You haven't rated #{@shop.name} yet.
+                = " "
+                =link_to "Add a rating", new_rating_path(:shop_id => @shop.id)
+        - else
+            .shop-user-rating Your rating: #{user_rating.first.rating} / 5.0
+    .shop-phone Phone: #{@shop.phone}
+    .shop-office Closest office: #{@shop.office.name}
+    .shop-distance Distance: #{@shop.distance_text}
+    .shop-walking-time Walking time: #{@shop.time_text}
+    - if user_signed_in?
+        .shop-created-by Restaurant entered by: #{@shop.user.name}

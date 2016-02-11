@@ -57,4 +57,9 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
+  resources :meals, except: [:show, :destroy]
+  resources :shops
+  resources :ratings, except: [:destroy]
+  resources :outings
+
 end

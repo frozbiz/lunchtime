@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160208214703) do
+ActiveRecord::Schema.define(version: 20160210230009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,37 @@ ActiveRecord::Schema.define(version: 20160208214703) do
     t.datetime "updated_at",                          null: false
   end
 
+  create_table "offices", force: :cascade do |t|
+    t.string   "name"
+    t.text     "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "outing_states", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "outings", force: :cascade do |t|
+    t.integer  "user_id",         null: false
+    t.integer  "shop_id",         null: false
+    t.datetime "departure",       null: false
+    t.string   "comment"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "outing_state_id"
+  end
+
+  add_index "outings", ["outing_state_id"], name: "index_outings_on_outing_state_id", using: :btree
+
+  create_table "outings_users", id: false, force: :cascade do |t|
+    t.integer "outing_id"
+    t.integer "user_id"
+  end
+
+  add_index "outings_users", ["outing_id"], name: "index_outings_users_on_outing_id", using: :btree
+  add_index "outings_users", ["user_id"], name: "index_outings_users_on_user_id", using: :btree
+
   create_table "ratings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "shop_id"
@@ -41,18 +72,24 @@ ActiveRecord::Schema.define(version: 20160208214703) do
     t.string   "name"
     t.string   "address"
     t.string   "phone"
-    t.string   "office"
     t.float    "avg_rating"
-    t.decimal  "avg_price",  precision: 5, scale: 2
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.decimal  "avg_price",       precision: 5, scale: 2
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "office_id"
+    t.float    "distance_meters"
+    t.string   "distance_text"
+    t.integer  "time_seconds"
+    t.string   "time_text"
   end
 
+  add_index "shops", ["office_id"], name: "index_shops_on_office_id", using: :btree
+
   create_table "users", force: :cascade do |t|
-    t.string   "username"
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "name"
     t.string   "mobile_phone"
+    t.string   "sonos_id"
+    t.string   "sonos_household_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "email",                  default: "", null: false
@@ -65,9 +102,14 @@ ActiveRecord::Schema.define(version: 20160208214703) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.integer  "office_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["office_id"], name: "index_users_on_office_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "outings", "outing_states"
+  add_foreign_key "shops", "offices"
+  add_foreign_key "users", "offices"
 end

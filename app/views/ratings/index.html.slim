@@ -1,0 +1,22 @@
+h1 Welcome to Lunchtime
+h2 The best lunch organizing tool at Sonos.
+
+h3 ratings index
+
+- if user_signed_in?
+    button.toggle-user-ratings Your ratings
+.all-ratings
+    - if @ratings.empty?
+        | No restaurant ratings entered yet!
+    - else
+        - @ratings.each do |rating|
+            .rating
+                = rating.shop.name + " rated " + rating.rating.to_s + "/5 by " + rating.user.name + ", average restaurant rating " + rating.shop.avg_rating.to_s
+- if user_signed_in?
+    .user-ratings
+        - if @user_ratings.empty?
+            | You haven't entered any restaurant ratings yet!
+        - else
+            - @user_ratings.each do |rating|
+                .user-rating
+                    = "You rated " + rating.shop.name + " " + rating.rating.to_s + "/5 on " + rating.updated_at.to_s + ", average restaurant rating " + rating.shop.avg_rating.to_s

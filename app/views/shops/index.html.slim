@@ -1,0 +1,31 @@
+h1 Welcome to Lunchtime
+h2 The best lunch organizing tool at Sonos.
+
+- user_ratings = false
+- if user_signed_in?
+    / how to make this toggle a variable? maybe has to be javascript?
+    button.toggle-user-ratings Your ratings
+.shops
+- @shops.each do |shop|
+    .shop
+        .shop-name= "Name: " + shop.name
+        .shop-address= "Address: " + shop.address
+        .global-rating
+            = "Average rating: " + (shop.avg_rating ? shop.avg_rating.to_s : "0.0")
+        .user-rating
+            - user_rating = Rating.where(:user_id => current_user.id, :shop_id => shop.id).first
+            - if user_rating
+                = "Your rating: " + user_rating.rating.to_s
+            - else
+                = "You haven't rated " + shop.name
+        / need to do some extra work to put the average price in a bucket and display the appropriate number of $ signs
+        .shop-price= "Average price: $" + (shop.avg_price ? shop.avg_price.to_s : "0.0")
+        .shop-meals
+            = "" + shop.meals.size.to_s + " meals at " + shop.name + " have been recorded"
+        .user-meals
+            - user_meals = shop.meals.where :user_id => current_user.id
+            .user-meals-count
+                = "You've eaten at " + shop.name + " " + user_meals.size.to_s + " times"
+            .user-meals-avg-rating
+                - avg_rating = user_meals.average(:rating)
+                = "Your average meal rating at " + shop.name + " is " + (avg_rating ? avg_rating.to_s : "0.0")
