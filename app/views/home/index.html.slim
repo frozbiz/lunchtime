@@ -1,16 +1,21 @@
-h1 Welcome to Lunchtime
-h2 The best lunch organizing tool at Sonos.
+h1 The best lunch organizing tool at Sonos.
 
-- unless current_user
+- unless user_signed_in?
   .welcome
-    | To use LunchTime you must become a member.
-    .login-links
-      .sign-up.button
-        = link_to "Sign In", new_user_session_path
-      .sign_in.button
-        = link_to "Sign Up", new_user_registration_path
+    = "To use LunchTime you must become a "
+    = link_to("member", new_user_registration_url) + '.'
 - else
-  .welcome
-    = "Welcome #{current_user.email}. Are you hungry?"
-  .signout.button
-    = link_to "Sign Out", destroy_user_session_path, :method => :delete
+  h2 
+    = "Welcome #{current_user.name} [#{current_user.email}]"
+  
+  h2 Are you hungry? Pick a place to go
+  p
+  = link_to "Plan an Outing", new_outing_url
+
+  h2 Current Outings
+  ul
+    - @outings.each do |o|
+      li
+        .name-time
+        = o.shop.name + o.departure.strftime(" @ %l:%M %P")
+        .comment = o.comment.to_s

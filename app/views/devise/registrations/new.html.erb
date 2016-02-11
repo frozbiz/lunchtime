@@ -26,6 +26,11 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <label>Home office: </label>
+    <%= f.collection_select :office_id, Office.all, :id, :name, :include_blank => "Select home Sonos office" %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

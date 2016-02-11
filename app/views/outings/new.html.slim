@@ -1,0 +1,22 @@
+html
+body
+
+  h1 New Outing
+
+  = form_for @outing, url: {action: "create"} do |f|
+    div
+      label Time
+      = f.text_field :departure, :value => Time.now + 30.minutes
+
+    div
+      label Restaurant
+      = f.collection_select :shop_id, Shop.all, :id, :name, :include_blank => "Select a Restaurant"
+
+    div
+      label Comment
+      = f.text_area :comment
+
+    = f.hidden_field :user_id, :value => current_user.id
+
+    .save-and-cancel
+      = f.submit "Create Outing"

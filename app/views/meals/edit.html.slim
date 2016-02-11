@@ -1,0 +1,29 @@
+h1 Welcome to Lunchtime
+h2 The best lunch organizing tool at Sonos.
+
+- unless user_signed_in?
+    h3 Must be logged in to edit meal records!
+- else
+    h3 edit meal
+
+    = form_for @meal, url: {action: "update"} do |f|
+        .meal-order
+            label= "Order: " 
+            = f.text_field :order, :placeholder => "Order"
+        .meal-price
+            label Price: $
+            = f.text_field :price, :placeholder => "0.00"
+        .meal-rating
+            label= "Rating: "
+            = f.text_field :rating, :placeholder => "0"
+            label= "/5"
+        .meal-restaurant
+            label= "Restaurant: "
+            = f.collection_select :shop_id, Shop.all, :id, :name, :include_blank => "Select a restaurant"
+        .meal-description
+            .meal-description-label
+                label Description/comments
+            .meal-description-field
+                = f.text_area :description
+        = f.hidden_field :user_id, :value => current_user.id
+        = f.submit "Save Meal Record"
