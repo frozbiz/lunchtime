@@ -10,3 +10,11 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :outings
 
 end
+
+class User::ParameterSanitizer < Devise::ParameterSanitizer
+  def initialize(*)
+    super
+    self.for(:sign_up) {|u| u.permit(:name, :email, :office_id, :password, :password_confirmation) }
+    self.for(:account_update) {|u| u.permit(:name, :email, :office_id, :password, :password_confirmation, :current_password) }
+  end
+end

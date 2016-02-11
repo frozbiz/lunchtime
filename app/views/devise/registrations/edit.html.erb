@@ -13,6 +13,11 @@
     <%= f.text_field :name, autofocus: true %>
   </div>
 
+  <div class="field">
+    <%= f.label :office %><br />
+    <%= f.collection_select :office_id, Office.all, :id, :name, :include_blank => "Select home Sonos office" %>
+  </div>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>

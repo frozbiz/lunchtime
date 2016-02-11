@@ -12,7 +12,7 @@ def new
         @rating = Rating.new
         rating_ids = Rating.where(user_id: current_user.id).select :shop_id
         @shops = Shop.where.not(id: rating_ids)
-        @current_shop_id = params[:shop_id]
+        @current_shop_id = params[:shop_id] || ''
     end
 end
 

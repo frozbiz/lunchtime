@@ -1,0 +1,21 @@
+.shop
+  b = link_to shop_url(id: shop.id) do
+    .shop-name = "Name: #{shop.name}"
+  .shop-address = "Address: #{shop.address}"
+  .global-rating = "Average rating: #{shop.avg_rating.to_f}"
+  .shop-price = "Average price: $#{shop.avg_price.to_f}"
+  .shop-meals = "#{shop.meals.size} meals at #{shop.name} have been recorded"
+  - if user_signed_in?
+    .user-rating
+      - user_rating = shop.ratings.where(user: current_user).first
+      - if user_rating
+          = "Your rating: #{user_rating.rating}"
+      - else
+          = "You haven't rated #{shop.name}"
+    / need to do some extra work to put the average price in a bucket and display the appropriate number of $ signs
+    .user-meals
+      - user_meals = shop.meals.where(:user => current_user).all
+      .user-meals-count
+        = "You've eaten at #{shop.name} #{user_meals.size} times"
+      .user-meals-avg-rating
+        = "Your average meal rating at #{shop.name} is #{user_meals.average(:rating).to_f}"
