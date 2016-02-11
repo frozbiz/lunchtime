@@ -1,0 +1,9 @@
+h2 My Meals
+.my-meals
+  - @my_meals.each do |m|
+    = render partial: 'shared/meal', locals: {meal: m}
+
+h2 My Outings
+.my-outings
+  - @my_outings.each do |o|
+    = render partial: 'shared/outing', locals: {outing: o}

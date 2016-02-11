@@ -29,3 +29,4 @@ h2 The best lunch organizing tool at Sonos.
             .user-meals-avg-rating
                 - avg_rating = user_meals.average(:rating)
                 = "Your average meal rating at " + shop.name + " is " + (avg_rating ? avg_rating.to_s : "0.0")
+        = link_to "Show details", shop_url(id: shop.id)

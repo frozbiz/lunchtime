@@ -16,23 +16,21 @@ body {
 
 .header {
   min-width: 600px;
-  position:relative;
   background: #303030;
+  padding-top: 30px;
   margin-bottom: 20px;
   color: white;
+
   a, a:visited { text-decoration: none; color:darkgrey};
   a:hover { color:white; }
+
   .app-name {
     font-family: 'Trebuchet MS', 'Geneva CE', lucida, sans-serif;
-    position: relative;
-    overflow: hidden;
-    width: 250px; height: 120px;
+    width: 250px;
+    height: 70px;
     font-size:230%;
-    margin: 0;
-    line-height: 108px;
     text-align: center;
     display:inline-block;
-//    font-size: 36px;
     a {
       border-left: 8px solid #b41818;
       padding: 0px 10px 7px 10px;
@@ -52,27 +50,24 @@ body {
     }
   }
   .right-edge {
-    line-height: 108px;
     float: right;
+    text-align: right;
     img {
       height: 20px;
       margin-bottom: -5px;
       padding-right: 5px;
     }
-    .button {
-    }
     .action {
-      margin: 5px;
       padding: 0 10px;
     }
   }
   .navigation {
-    position: absolute;
-    bottom: 0;
-    #menu { float: left; margin: 0px; }
-    #menu li { display: inline; }
-    #menu li a { float: left; padding: 8px 30px; margin: 0 1px 0 0; }
-    #menu li a:hover { background: dimgray }
+    .nav-item {
+      display: inline-block;
+      text-align: center;
+      width: 150px;
+      font-size: 150%;
+    }
+    .nav-item:hover { background: dimgray}
   }
-  .clear { clear: both; }
 }

@@ -1,12 +1,9 @@
 class MealsController < ApplicationController
 
 def index
-    unless user_signed_in?
-        @meals = Meal.all
-    else
-        @meals = current_user.meals
-    end
-    @recent_meals = @meals.order(created_at: :desc).last(10)
+    @limitless = params[:limitless]
+    lim = @limitless ? nil : 100
+    @meals = Meal.order(created_at: :desc).limit(lim)
 end
 
 def new

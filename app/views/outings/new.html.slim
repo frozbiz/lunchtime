@@ -1,6 +1,3 @@
-html
-body
-
   h1 New Outing
 
   = form_for @outing, url: {action: "create"} do |f|
@@ -17,6 +14,7 @@ body
       = f.text_area :comment
 
     = f.hidden_field :user_id, :value => current_user.id
+    = f.hidden_field :outing_state, :value => "PROPOSED"
 
     .save-and-cancel
       = f.submit "Create Outing"

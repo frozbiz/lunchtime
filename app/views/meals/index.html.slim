@@ -1,22 +1,6 @@
-h1 Welcome to Lunchtime
-h2 The best lunch organizing tool at Sonos.
-
-div.meals
-    - unless current_user
-        h3 Most recent meals
-        .global-total-meals
-            | there have been #{@meals.size} total meals
-        .global-recent-meals
-            | the last #{@recent_meals.size} meals were:
-    - else
-        h3 Your recent meals
-        .logged-in-user
-            | logged in user: [#{current_user.name}]
-        .user-total-meals
-            | you have #{@meals.size} total meals
-        .user-recent-meals
-            | your last #{@recent_meals.size} meals were:
-
-    - @recent_meals.each do |meal|
-        .meal
-            = meal.order + " at " + meal.shop.name + " for $" + meal.price.to_s('F') + " rating " + meal.rating.to_s('F') + "/5 on " + meal.created_at.to_s()
+- hone = @limitless ? "All Meals" : "Recent Meals"
+h1 = hone
+= "Showing #{@meals.size} meals"
+.meals
+  - @meals.each do |m|
+    = render partial: 'shared/meal', locals: {meal: m, show_user: true}

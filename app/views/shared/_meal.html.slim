@@ -1,0 +1,8 @@
+- show_user |= false
+
+.meal
+  = meal.order
+  = " by #{meal.user.name}" if (show_user)
+  = " at #{meal.shop.name}" 
+  .stats
+  = "$#{meal.price.to_s('F')} rating #{meal.rating.to_s('F')} of 5 on #{meal.created_at.strftime("%h %d")}"

@@ -14,23 +14,24 @@ html
             span class="part-two" Time
         .right-edge
           - if current_user
-            img src="/img/person.png"
-            span = current_user.email
-            span.action
+            = link_to user_url(current_user) do
+              img src="/img/person.png"
+              span = current_user.email
+            .action
+              = link_to "settings", edit_user_registration_url
+            .action
               = link_to "sign out", destroy_user_session_path, :method => :delete
           - else
             span.action.button
               = link_to "Login", new_user_session_url
             span.action.button
               = link_to "Sign Up", new_user_registration_url
-      .navigation
-        ul#menu
-          li
-            = link_to "Outings", outings_url
-          li
-            = link_to "Shops", shops_url
-          li
-            = link_to "Meals", meals_url
-      .clear
+        .navigation
+          = link_to outings_url do
+            span.nav-item Outings
+          = link_to shops_url do
+            span.nav-item Restaraunts
+          = link_to meals_url do
+            span.nav-item Meals
     .page
       == yield
