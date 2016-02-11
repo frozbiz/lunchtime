@@ -60,11 +60,12 @@ Rails.application.routes.draw do
   resources :meals, except: [:show, :destroy]
   resources :shops
   resources :ratings, except: [:destroy]
-  resources :outings, except: [:edit] do
+  resources :outings, except: [:edit, :destroy] do
       member do
           get 'join' => 'outings#join', as: :join
           get 'cancel' => 'outings#cancel', as: :cancel
           get 'leave' => 'outings#leave', as: :leave
+          get 'complete' => 'outings#complete', as: :complete
       end
   end
 

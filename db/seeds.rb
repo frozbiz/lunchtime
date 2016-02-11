@@ -6,11 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-OutingState.create(name: "Proposed")
-OutingState.create(name: "Imminent")
-OutingState.create(name: "Underway")
-OutingState.create(name: "Complete")
-OutingState.create(name: "Canceled")
 Office.create(name: "Boston-LCC", address: "2 Avenue de Lafayette, Boston, MA")
 Office.create(name: "Santa Barbara-State", address: "419 State Street, Santa Barbara, CA")
 Office.create(name: "Santa Barbara-Chapala", address: "614 Chapala Street, Santa Barbara, CA")

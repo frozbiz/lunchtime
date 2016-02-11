@@ -1,0 +1,51 @@
+h3 Outing to #{@outing.shop.name} at #{@outing.departure.strftime("%l:%M %P on %A %m/%e")}
+
+.outing
+  .timing
+    - if @outing.outing_state == "PROPOSED"
+    - elsif @outing.outing_state == "IMMINENT"
+      strong This Outing is imminent!
+    - elsif @outing.outing_state == "UNDERWAY"
+      = "This Outing is currently underway. "
+      - if @user_is_member
+        = link_to "Finished? ", complete_outing_url(:id => @outing.id)
+    - elsif @outing.outing_state == "COMPLETE"
+      = "This Outing is finished. "
+      - if @user_is_member
+        = link_to "Enter a meal?", new_meal_url(:shop_id => @outing.shop.id)
+    - elsif @outing.outing_state == "CANCELED"
+      | This Outing was canceled by the organizer.
+  .organizer
+    = "Organized by "
+    - if @outing.user.id == current_user.id
+      = "you. "
+      - if @outing.outing_state != "CANCELED"
+        = link_to "Cancel Outing?", cancel_outing_url(id: @outing.id)
+        = " "
+    - else
+      = "#{@outing.user.name}. "
+    - if @outing.outing_state != "CANCELED"
+      - if @user_is_member
+        = link_to "Leave Outing?", leave_outing_url(id: @outing.id)
+      - else
+        = link_to "Join Outing?", join_outing_url(id: @outing.id)
+  .shop
+    .shop-name
+      = link_to "#{@outing.shop.name}", shop_url(id: @outing.shop.id)
+    .shop-ratings
+      .user-rating
+        - if @user_rating.nil?
+          = "You haven't rated #{@outing.shop.name} yet. "
+          = link_to "Add a rating?", new_rating_path(shop_id: @outing.shop.id)
+        - else
+          = "You rated #{@outing.shop.name} #{@user_rating.rating} / 5. "
+          = link_to "Edit your rating?", edit_rating_url(id: @user_rating.id)
+      .global-rating
+        - if @global_ratings.empty?
+          | No ratings yet.
+        - else
+          | Average rating #{@outing.shop.avg_rating} / 5.
+    .shop-distance
+      | #{@outing.shop.distance_text} away from #{@outing.shop.office.name} office. (Approx. #{@outing.shop.time_text} walk.)
+      .shop-directions
+        iframe width='600' height='450' frameborder='0' style='border:0; background-color:blue' src="https://www.google.com/maps/embed/v1/directions?key=#{@gmaps_api_key}&origin=#{@office_addr}&destination=#{@shop_addr}&mode=walking" allowfullscreen='true'

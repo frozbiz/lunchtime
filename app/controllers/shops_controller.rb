@@ -38,6 +38,8 @@ end
 
 def show
     @shop = Shop.find(params[:id])
+    @shop_addr = Rack::Utils.escape(@shop.address)
+    @gmaps_api_key = "AIzaSyD9ZWdbd0MX0My0OjA4RmsCyj4OaE7pV4w"
 end
 
 end

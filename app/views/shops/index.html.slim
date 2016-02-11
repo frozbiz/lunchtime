@@ -2,9 +2,11 @@ h1 Welcome to Lunchtime
 h2 The best lunch organizing tool at Sonos.
 
 - user_ratings = false
-- if user_signed_in?
-    / how to make this toggle a variable? maybe has to be javascript?
-    button.toggle-user-ratings Your ratings
+/- if user_signed_in?
+  / how to make this toggle a variable? maybe has to be javascript?
+  /button.toggle-user-ratings Your ratings
+.add-shop
+  = link_to "Add a shop?", new_shop_url
 .shops
 - @shops.each do |shop|
     .shop
@@ -13,7 +15,7 @@ h2 The best lunch organizing tool at Sonos.
         .global-rating
             = "Average rating: " + (shop.avg_rating ? shop.avg_rating.to_s : "0.0")
         .user-rating
-            - user_rating = Rating.where(:user_id => current_user.id, :shop_id => shop.id).first
+            - user_rating = Rating.find_by(:user_id => current_user.id, :shop_id => shop.id)
             - if user_rating
                 = "Your rating: " + user_rating.rating.to_s
             - else

@@ -9,6 +9,7 @@ end
 def new
     if user_signed_in?
         @meal = Meal.new
+        @current_shop_id = params[:shop_id] || -1
     end
 end
 

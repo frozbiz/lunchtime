@@ -18,17 +18,22 @@ h3 Restaurant details
         - avg_rating = @shop.avg_rating
     .shop-rating Average rating: #{avg_rating} / 5.0
     - if user_signed_in?
-        - user_rating = @shop.ratings.where(:user_id => current_user.id)
-        - if user_rating.empty?
+        - user_rating = @shop.ratings.find_by(:user_id => current_user.id)
+        - if user_rating.nil?
             .shop-user-rating
-                | You haven't rated #{@shop.name} yet.
-                = " "
-                =link_to "Add a rating", new_rating_path(:shop_id => @shop.id)
+                = "You haven't rated #{@shop.name} yet. "
+                = link_to "Add a rating?", new_rating_path(:shop_id => @shop.id)
         - else
-            .shop-user-rating Your rating: #{user_rating.first.rating} / 5.0
+            .shop-user-rating
+              = "Your rating: #{user_rating.rating} / 5.0 "
+              = link_to "Edit rating?", edit_rating_path(:id => user_rating.id, :shop_id => @shop.id)
+        .user-meal-entry
+          = link_to "Add a meal at #{@shop.name}?", new_meal_url(:shop_id => @shop.id)
     .shop-phone Phone: #{@shop.phone}
     .shop-office Closest office: #{@shop.office.name}
     .shop-distance Distance: #{@shop.distance_text}
     .shop-walking-time Walking time: #{@shop.time_text}
+    .shop-map
+      iframe width='600' height='450' frameborder='0' style='border:0; background-color:blue' src="https://www.google.com/maps/embed/v1/place?key=#{@gmaps_api_key}&q=#{@shop_addr}" allowfullscreen='true'
     - if user_signed_in?
         .shop-created-by Restaurant entered by: #{@shop.user.name}
