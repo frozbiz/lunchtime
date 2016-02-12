@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 20160212012244) do
     t.integer  "shop_id"
     t.string   "order"
     t.text     "description"
-    t.decimal  "rating",      precision: 2, scale: 1
     t.decimal  "price",       precision: 5, scale: 2
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
@@ -95,21 +94,11 @@ ActiveRecord::Schema.define(version: 20160212012244) do
 
   add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
 
-  create_table "ratings", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "shop_id"
-    t.text     "comment"
-    t.integer  "rating"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "shops", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
     t.string   "address"
     t.string   "phone"
-    t.float    "avg_rating"
     t.decimal  "avg_price",       precision: 5, scale: 2
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
