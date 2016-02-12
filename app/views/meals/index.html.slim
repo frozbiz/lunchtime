@@ -1,1 +1,6 @@
-h1 meals index
+- hone = @limitless ? "All Meals" : "Recent Meals"
+h1 = hone
+= "Showing #{@meals.size} meals"
+.meals
+  - @meals.each do |m|
+    = render partial: 'shared/meal', locals: {meal: m, show_user: true}

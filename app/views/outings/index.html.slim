@@ -1,0 +1,5 @@
+h1 All Outings
+
+.outings
+  - @outings.each do |o|
+    = render partial: 'shared/outing', locals: {outing: o}

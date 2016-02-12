@@ -1,0 +1,15 @@
+.outing
+  = link_to outing_url(id: outing.id) do
+    .name-time = outing.shop.name + outing.departure.strftime(" @ %l:%M %P %Z")
+  .comment = outing.comment.to_s
+  - if user_signed_in?
+    - if outing.user.id == current_user.id
+      .cancel-outing 
+        = "You scheduled this Outing. "
+        = link_to "Cancel this Outing?", cancel_outing_url(id: outing.id)
+    - if outing.users.include?(current_user)
+      .leave-outing
+        = "You are a member of this Outing. "
+        = link_to "Leave this Outing?", leave_outing_url(id: outing.id)
+    - else
+      = link_to "Join this Outing?", join_outing_url(id: outing.id)

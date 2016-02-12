@@ -1,0 +1,20 @@
+  h1 New Outing
+
+  = form_for @outing, url: {action: "create"} do |f|
+    div
+      label Time
+      = f.text_field :departure, :value => "#{Time.now.in_time_zone.hour}:#{Time.now.in_time_zone.min + 30}"
+
+    div
+      label Restaurant
+      = f.collection_select :shop_id, Shop.all, :id, :name, {:prompt => "Select a Restaurant", :selected => @prefill_shop_id}
+
+    div
+      label Comment
+      = f.text_area :comment
+
+    = f.hidden_field :user_id, :value => current_user.id
+    = f.hidden_field :outing_state, :value => "PROPOSED"
+
+    .save-and-cancel
+      = f.submit "Create Outing"

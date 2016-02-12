@@ -2,20 +2,72 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// These two lines are meant to be somewhat of a reset to get us on a solid footing
+* { margin:0; padding:0; }
+body, div, span, p, a, img, ul, ol, li, table, th, tr, td, form, fieldset, legend, dl, dt, dd, blockquote, applet, object { border:0; }
 
-.login-links {
-  padding: 10px;
+body {
+  font: 0.8em/1.5 "arial",sans-serif;
+  color: #303030;
+  .page {
+    padding: 0 20px;
+  }
 }
 
-.button {
-  display: inline-block;
-  padding: 10px;
-  a {
-    border: 2px solid red;
-    color: red;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 10px;
-    text-decoration: none;
+.header {
+  min-width: 600px;
+  background: #303030;
+  padding-top: 30px;
+  margin-bottom: 20px;
+  color: white;
+
+  a, a:visited { text-decoration: none; color:darkgrey};
+  a:hover { color:white; }
+
+  .app-name {
+    font-family: 'Trebuchet MS', 'Geneva CE', lucida, sans-serif;
+    width: 250px;
+    height: 70px;
+    font-size:230%;
+    text-align: center;
+    display:inline-block;
+    a {
+      border-left: 8px solid #b41818;
+      padding: 0px 10px 7px 10px;
+    }
+    .part-one {
+      color: white;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    .part-two {
+        color: dimgray;
+    }
+    a:hover {
+      .part-two {
+        color: white;
+      }
+    }
+  }
+  .right-edge {
+    float: right;
+    text-align: right;
+    img {
+      height: 20px;
+      margin-bottom: -5px;
+      padding-right: 10px;
+    }
+    .action {
+      padding: 0 10px;
+    }
+  }
+  .navigation {
+    .nav-item {
+      display: inline-block;
+      text-align: center;
+      width: 150px;
+      font-size: 150%;
+    }
+    .nav-item:hover { background: dimgray}
   }
 }

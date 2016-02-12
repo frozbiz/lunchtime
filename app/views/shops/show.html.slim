@@ -1,1 +1,43 @@
-h1 show shop
+h1 Welcome to Lunchtime
+h2 The best lunch organizing tool at Sonos.
+
+h3 Restaurant details
+
+.shop
+    .schedule-outing-here
+      = link_to "Plan an outing?", new_outing_url(:shop_id => @shop.id)
+    .shop-name Name: #{@shop.name}
+    .shop-address Address: #{@shop.address}
+    - if @shop.avg_price.nil?
+        - avg_price = 0.0
+    - else
+        - avg_price = @shop.avg_price
+    .shop-price
+      - if avg_price == 0.0
+        - price_title = "No meals recorded yet."
+      - else
+        - price_title = "$#{format('%0.02f', avg_price)}"
+      span title="#{price_title}"
+        - if avg_price == 0.0
+          span.gray-dollar-sign= "$$$"
+        - elsif avg_price <= 6.0
+          span.gold-dollar-sign= "$"
+          span.gray-dollar-sign= "$$"
+        - elsif avg_price <= 12.0
+          span.gold-dollar-sign= "$$"
+          span.gray-dollar-sign= "$"
+        - else
+          span.gold-dollar-sign= "$$$"
+    .shop-rating
+      = rating_for @shop, "quality", :disable_after_rate => false, :half_show => true, :enable_half => false
+    - if user_signed_in?
+        .user-meal-entry
+          = link_to "Add a meal at #{@shop.name}?", new_meal_url(:shop_id => @shop.id)
+    .shop-phone Phone: #{@shop.phone}
+    .shop-office Closest office: #{@shop.office.name}
+    .shop-distance Distance: #{@shop.distance_text}
+    .shop-walking-time Walking time: #{@shop.time_text}
+    .shop-map
+      iframe width='600' height='450' frameborder='0' style='border:0; background-color:blue' src="https://www.google.com/maps/embed/v1/place?key=#{@gmaps_api_key}&q=#{@shop_addr}" allowfullscreen='true'
+    - if user_signed_in?
+        .shop-created-by Restaurant entered by: #{@shop.user.name}

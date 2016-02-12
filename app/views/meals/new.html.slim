@@ -1,1 +1,27 @@
-h1 new meal
+h1 Welcome to Lunchtime
+h2 The best lunch organizing tool at Sonos.
+
+-unless current_user
+    h3 Must be logged in to enter meals!
+-else
+    h3 new meal
+
+    = form_for @meal, url: {action: "create"} do |f|
+        .meal-order
+            label= "Order: "
+            = f.text_field :order, :placeholder => "Order"
+        .meal-price
+            label Price: $
+            = f.text_field :price, :placeholder => "0.00"
+        .meal-rating
+          = rating_for @meal, "quality", :disable_after_rate => false, :half_show => true, :enable_half => true
+        .meal-restaurant
+            label= "Restaurant: "
+            = f.collection_select :shop_id, Shop.all, :id, :name, {:prompt => "Select a restaurant", :selected => @current_shop_id}
+        .meal-description
+            .meal-description-label
+                label Description/comments
+            .meal-description-field
+                = f.text_area :description
+        = f.hidden_field :user_id, :value => current_user.id
+        = f.submit "Save Meal Record"

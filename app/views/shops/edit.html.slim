@@ -1,1 +1,18 @@
-h1 edit shop
+h1 Welcome to Lunchtime
+h2 The best lunch organizing tool at Sonos.
+
+h3 edit restaurant
+
+/ TODO: tags
+= form_for @shop, url: {action: "update"} do |f|
+    .shop-name
+        = f.text_field :name, :placeholder => "Name"
+    .shop-address
+        = f.text_field :address, :placeholder => "Address"
+    .shop-phone
+        = f.text_field :phone, :placeholder => "Phone number"
+    .shop-office
+        label= "Office: "
+        = f.collection_select :office_id, Office.all, :id, :name, {:prompt => "Select closest Sonos office", :selected => current_user.office_id || ''}
+    = f.hidden_field :user_id, :value => current_user.id
+    = f.submit "Save Restaurant Record"

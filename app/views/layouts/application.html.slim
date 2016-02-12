@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title Lunchtime
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    .header
+      .control-bar
+        .app-name
+          = link_to root_url do
+            span class="part-one" Lunch:
+            span class="part-two" Time
+        .right-edge
+          - if current_user
+            .action
+              = link_to user_url(current_user) do
+                img src="/img/person.png"
+                span = current_user.name
+            .action
+              = link_to "settings", edit_user_registration_url
+            .action
+              = link_to "sign out", destroy_user_session_path, :method => :delete
+          - else
+            span.action.button
+              = link_to "Login", new_user_session_url
+            span.action.button
+              = link_to "Sign Up", new_user_registration_url
+        .navigation
+          = link_to outings_url do
+            span.nav-item Outings
+          = link_to shops_url do
+            span.nav-item Restaurants
+          = link_to meals_url do
+            span.nav-item Meals
+    .page
+      == yield

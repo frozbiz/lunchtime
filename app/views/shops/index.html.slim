@@ -1,1 +1,8 @@
-h1 shops index
+h1 All Restaurants
+
+.add-shop
+  = link_to "Add a restaurant?", new_shop_url
+
+.shops
+  - @shops.each do |s|
+    = render partial: 'shared/shop', locals: {shop: s}
