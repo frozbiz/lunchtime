@@ -5,4 +5,10 @@
   = " by #{meal.user.name}" if (show_user)
   = " at #{meal.shop.name}" 
   .stats
-  = "$#{meal.price.to_s('F')} rating #{meal.rating.to_s('F')} of 5 on #{meal.created_at.strftime("%h %d")}"
+    = "$#{meal.price.to_s('F')} on #{meal.created_at.strftime("%h %d")}"
+  -if user_signed_in? and current_user.id == meal.user.id
+    .rating
+      = rating_for meal, "quality", :disable_after_rate => false, :half_show => true, :enable_half => true
+  -if user_signed_in? and current_user.id == meal.user.id
+    .edit-meal
+      = link_to "Edit this meal entry?", edit_meal_url(id: meal.id)

@@ -1,7 +1,11 @@
 class ShopsController < ApplicationController
 
 def index
-    @shops = Shop.all
+  if user_signed_in?
+    @shops = Shop.where(:office_id => current_user.office_id).order(distance_meters: :asc)
+  else
+    @shops = Shop.all.order(distance_meters: :asc)
+  end
 end
 
 def new

@@ -1,10 +1,11 @@
 class Shop < ActiveRecord::Base
     has_many :meals
-    has_many :ratings
     belongs_to :user
     belongs_to :office
 
     before_save :attempt_to_calculate_distance
+
+    ratyrate_rateable "quality"
 
     def attempt_to_calculate_distance
         uri = "https://maps.googleapis.com/maps/api/distancematrix/json"

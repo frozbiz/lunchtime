@@ -4,10 +4,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   has_many :meals
-  has_many :ratings
   has_many :shops
   belongs_to :office
   has_and_belongs_to_many :outings
+
+  ratyrate_rater
 
 end
 

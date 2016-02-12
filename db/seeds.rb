@@ -6,13 +6,18 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Office.create(name: "Boston-LCC", address: "2 Avenue de Lafayette, Boston, MA")
-Office.create(name: "Santa Barbara-State", address: "419 State Street, Santa Barbara, CA")
-Office.create(name: "Santa Barbara-Chapala", address: "614 Chapala Street, Santa Barbara, CA")
-Office.create(name: "Santa Barbara-Mason", address: "25 E Mason Street, Santa Barbara, CA")
-Office.create(name: "Santa Barbara-Salsipuedes", address: "415 N Salsipuedes Street, Santa Barbara, CA")
-Office.create(name: "Seattle", address: "1501 E Madison Street, Seattle, WA")
+Office.create(name: "Boston-LCC", address: "2 Avenue de Lafayette, Boston, MA", tz: "America/New_York")
+Office.create(name: "Santa Barbara-State", address: "419 State Street, Santa Barbara, CA", tz: "America/Los_Angeles")
+Office.create(name: "Santa Barbara-Chapala", address: "614 Chapala Street, Santa Barbara, CA", tz: "America/Los_Angeles")
+Office.create(name: "Santa Barbara-Mason", address: "25 E Mason Street, Santa Barbara, CA", tz: "America/Los_Angeles")
+Office.create(name: "Santa Barbara-Salsipuedes", address: "415 N Salsipuedes Street, Santa Barbara, CA", tz: "America/Los_Angeles")
+Office.create(name: "Seattle", address: "1501 E Madison Street, Seattle, WA", tz: "America/Los_Angeles")
+Office.create(name: "Hilversum", address: "Schuttersweg 10, 1217 Hilversum, Netherlands", tz: "Europe/Amsterdam")
+#
+#
 User.new(name: "no one", office_id: Office.find_by(:name => "Boston-LCC").id, id: 9999, email: "noone@nowhere.com", password: "a3498flgweufbewfgweifb").save
+#
+#
 Shop.create(name: "Falafel King", address: "48 Winter Street, Boston, MA", office_id: Office.find_by(:name => "Boston-LCC").id, user_id: User.find_by(:name => "no one").id)
 Shop.create(name: "Beard Papa's", address: "31 Harrison Avenue, Boston, MA", office_id: Office.find_by(:name => "Boston-LCC").id, user_id: User.find_by(:name => "no one").id)
 Shop.create(name: "New Saigon Sandwich", address: "696 Washington Street, Boston, MA", office_id: Office.find_by(:name => "Boston-LCC").id, user_id: User.find_by(:name => "no one").id)

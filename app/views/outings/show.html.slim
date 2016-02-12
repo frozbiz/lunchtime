@@ -41,7 +41,7 @@ h3 Outing to #{@outing.shop.name} at #{@outing.departure.strftime("%l:%M %P on %
           = "You rated #{@outing.shop.name} #{@user_rating.rating} / 5. "
           = link_to "Edit your rating?", edit_rating_url(id: @user_rating.id)
       .global-rating
-        - if @global_ratings.empty?
+        - if @global_ratings.blank?
           | No ratings yet.
         - else
           | Average rating #{@outing.shop.avg_rating} / 5.

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post '/rate' => 'rater#create', :as => 'rate'
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -57,7 +58,7 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
-  resources :meals, except: [:show, :destroy]
+  resources :meals, except: [:destroy]
   resources :shops
   resources :ratings, except: [:destroy]
   resources :outings, except: [:edit, :destroy] do
