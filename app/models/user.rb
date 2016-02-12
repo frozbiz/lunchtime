@@ -16,6 +16,6 @@ class User::ParameterSanitizer < Devise::ParameterSanitizer
   def initialize(*)
     super
     self.for(:sign_up) {|u| u.permit(:name, :email, :office_id, :password, :password_confirmation) }
-    self.for(:account_update) {|u| u.permit(:name, :email, :office_id, :password, :password_confirmation, :current_password) }
+    self.for(:account_update) {|u| u.permit(:name, :email, :sonos_id, :sonos_household_id, :office_id, :password, :password_confirmation, :current_password) }
   end
 end
