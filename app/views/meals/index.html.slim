@@ -1,6 +1,11 @@
-- hone = @limitless ? "All Meals" : "Recent Meals"
-h1 = hone
-= "Showing #{@meals.size} meals"
+.meal-stats
+  = "Showing #{@meals.size} meals of #{@total_meals} logged."
+  - if user_signed_in?
+    .new-meal
+      = link_to( "Enter a meal", new_meal_url) 
+
+h2 = @limitless ? "All Meals" : "Recent Meals"
+
 .meals
   - @meals.each do |m|
     = render partial: 'shared/meal', locals: {meal: m, show_user: true}

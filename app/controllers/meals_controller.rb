@@ -1,9 +1,10 @@
 class MealsController < ApplicationController
 
 def index
-    @limitless = params[:limitless]
-    lim = @limitless ? nil : 100
-    @meals = Meal.order(created_at: :desc).limit(lim)
+  @limitless = params[:limit] == 'none'
+  lim = @limitless ? nil : (params[:limit] || 100)
+  @meals = Meal.order(created_at: :desc).limit(lim)
+  @total_meals = Meal.count
 end
 
 def show

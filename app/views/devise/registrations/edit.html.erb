@@ -5,7 +5,7 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email %>
   </div>
 
   <div class="field">
@@ -16,6 +16,16 @@
   <div class="field">
     <%= f.label :office %><br />
     <%= f.collection_select :office_id, Office.all, :id, :name, :include_blank => "Select home Sonos office" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Sonos ID" %><br />
+    <%= f.text_field :sonos_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Household ID" %><br />
+    <%= f.text_field :sonos_household_id %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -42,8 +52,8 @@
   </div>
 <% end %>
 
+<br/>
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-<%= link_to "Back", :back %>
