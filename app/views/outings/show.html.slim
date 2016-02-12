@@ -16,35 +16,26 @@ h3 Outing to #{@outing.shop.name} at #{@outing.departure.strftime("%l:%M %P on %
     - elsif @outing.outing_state == "CANCELED"
       | This Outing was canceled by the organizer.
   .organizer
-    = "Organized by "
-    - if @outing.user.id == current_user.id
-      = "you. "
+    - if @outing.user == current_user
+      = "Organized by you. "
       - if @outing.outing_state != "CANCELED"
         = link_to "Cancel Outing?", cancel_outing_url(id: @outing.id)
         = " "
     - else
-      = "#{@outing.user.name}. "
-    - if @outing.outing_state != "CANCELED"
+      = "Organized by #{@outing.user.name}. "
+
+    - unless (@outing.outing_state == "CANCELED" || @outing.outing_state == "COMPLETE")
       - if @user_is_member
         = link_to "Leave Outing?", leave_outing_url(id: @outing.id)
-      - else
+      - elsif user_signed_in?
         = link_to "Join Outing?", join_outing_url(id: @outing.id)
+  .participant-list
+    = "Participants: "
+    = @outing.users.map(&:name).join(", ")
+  br
   .shop
     .shop-name
       = link_to "#{@outing.shop.name}", shop_url(id: @outing.shop.id)
-    .shop-ratings
-      .user-rating
-        - if @user_rating.nil?
-          = "You haven't rated #{@outing.shop.name} yet. "
-          = link_to "Add a rating?", new_rating_path(shop_id: @outing.shop.id)
-        - else
-          = "You rated #{@outing.shop.name} #{@user_rating.rating} / 5. "
-          = link_to "Edit your rating?", edit_rating_url(id: @user_rating.id)
-      .global-rating
-        - if @global_ratings.blank?
-          | No ratings yet.
-        - else
-          | Average rating #{@outing.shop.avg_rating} / 5.
     .shop-distance
       | #{@outing.shop.distance_text} away from #{@outing.shop.office.name} office. (Approx. #{@outing.shop.time_text} walk.)
       .shop-directions

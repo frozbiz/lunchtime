@@ -7,11 +7,8 @@ class ApplicationController < ActionController::Base
 protected
 
   def set_user_time_zone
-    if current_user
-      Time.zone = ActiveSupport::TimeZone.new(current_user.office.tz)
-    else
-      Time.zone = ActiveSupport::TimeZone.new(Office.find(1).tz)
-    end
+    office = current_user.try(:office) || Office.find(1)
+    Time.zone = ActiveSupport::TimeZone.new(office.tz)
   end
 
   def devise_parameter_sanitizer

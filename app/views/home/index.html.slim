@@ -5,10 +5,7 @@ h1 The best lunch organizing tool at Sonos.
     = "To use LunchTime you must become a "
     = link_to("member", new_user_registration_url) + '.'
 - else
-  h2 
-    = "Welcome #{current_user.name} [#{current_user.email}]"
-  
-  h2 Are you hungry? Pick a place to go
+
   p
   - if @user_owned_outing.nil? and @user_member_outing.nil?
     .no-outings
@@ -17,8 +14,7 @@ h1 The best lunch organizing tool at Sonos.
   - else
     - if not @user_owned_outing.nil?
       .owned-outing
-        = "You're organizing an Outing to #{@user_owned_outing.shop.name} at #{@user_owned_outing.departure.strftime(" %l:%M %P")}. "
-        = link_to "Cancel this Outing?", cancel_outing_url(id: @user_owned_outing.id)
+        = "You're organizing an Outing to #{@user_owned_outing.shop.name} at #{@user_owned_outing.departure.strftime(" %l:%M %P %Z")}. "
       .owned-outing-membership
         - if @user_member_outing.nil? or @user_member_outing.id != @user_owned_outing.id
           = "#{@user_owned_outing.users.size} people are going. "
@@ -30,24 +26,8 @@ h1 The best lunch organizing tool at Sonos.
       .member-outing
         = "You're joining an Outing to #{@user_member_outing.shop.name} at #{@user_member_outing.departure.strftime(" %l:%M %P")} with #{@user_member_outing.users.size() - 1} others. "
         = link_to "Leave this Outing?", leave_outing_url(id: @user_member_outing.id)
-
-  h2 Soonest Outings
-  ul
+  br
+  h2 = "Upcoming Outings around #{@current_user.office.try(:name)}"
+  .outings
     - @outings.each do |o|
-      li
-        .name-time
-        = o.shop.name + o.departure.strftime(" @ %l:%M %P")
-        .comment = o.comment.to_s
-        = link_to "Outing details", outing_url(id: o.id)
-        - if user_signed_in?
-          = " "
-          - if o.user.id == current_user.id
-            .cancel-outing 
-              = "You scheduled this Outing. "
-              = link_to "Cancel this Outing?", cancel_outing_url(id: o.id)
-          - elsif not o.users.find_by(:id => current_user.id).nil?
-            .leave-outing
-              = "You are a member of this Outing. "
-              = link_to "Leave this Outing?", leave_outing_url(id: o.id)
-          - else
-            = link_to "Join this Outing?", join_outing_url(id: o.id)
+      = render partial: 'shared/outing', locals: {outing: o}
