@@ -14,9 +14,10 @@ html
             span class="part-two" Time
         .right-edge
           - if current_user
-            = link_to user_url(current_user) do
-              img src="/img/person.png"
-              span = current_user.email
+            .action
+              = link_to user_url(current_user) do
+                img src="/img/person.png"
+                span = current_user.name
             .action
               = link_to "settings", edit_user_registration_url
             .action
