@@ -5,6 +5,7 @@ class OutingsController < ApplicationController
 
   def index
     @outings = Outing.active.order(departure: :desc)
+    @recent_outings = Outing.where(outing_state: :COMPLETE).order(departure: :desc).limit(10)
   end
 
   def new
@@ -13,15 +14,13 @@ class OutingsController < ApplicationController
   end
 
   def create
-    Outing.create(outing_params)
-    redirect_to :back
+    @outing = Outing.create(outing_params)
+    redirect_to outing_url(@outing)
   end
 
   def show
     @outing = Outing.find(params[:id])
     @user_is_member = current_user && @outing.users.find_by(:id => current_user.id)
-    @global_ratings = nil #Rating.where(:shop_id => @outing.shop.id)
-    @user_rating = nil # current_user && @global_ratings.find_by(:user_id => current_user.id)
     @shop_addr = Rack::Utils.escape(@outing.shop.address)
     @office_addr = Rack::Utils.escape(@outing.shop.office.address)
     @gmaps_api_key = "AIzaSyD9ZWdbd0MX0My0OjA4RmsCyj4OaE7pV4w"
@@ -58,7 +57,7 @@ class OutingsController < ApplicationController
   def update
     @outing = Outing.find(params[:id])
     if @outing.update_attributes(outing_params)
-      redirect_to :back
+      redirect_to outing_url(@outing)
     end
   end
 

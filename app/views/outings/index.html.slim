@@ -1,5 +1,14 @@
-h1 All Outings
+h2 Current Outings
 
 .outings
   - @outings.each do |o|
+    = render partial: 'shared/outing', locals: {outing: o}
+
+  .schedule-outing-here
+    = link_to "Plan a new outing", new_outing_url
+
+h2 Recent Outings
+
+.outings
+  - @recent_outings.each do |o|
     = render partial: 'shared/outing', locals: {outing: o}
