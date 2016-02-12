@@ -1,7 +1,10 @@
 h1 Welcome to Lunchtime
 h2 The best lunch organizing tool at Sonos.
 
-h3 Restaurant details
+h3
+  = "Restaurant details "
+  - if user_signed_in?
+    =link_to "Edit", edit_shop_url(:id => @shop.id)
 
 .shop
     .schedule-outing-here
@@ -30,6 +33,10 @@ h3 Restaurant details
           span.gold-dollar-sign= "$$$"
     .shop-rating
       = rating_for @shop, "quality", :disable_after_rate => false, :half_show => true, :enable_half => false
+    - unless @shop.tag_list.empty?
+      .tag-list
+        | Tagged as: 
+        = @shop.tag_list.join(", ")
     - if user_signed_in?
         .user-meal-entry
           = link_to "Add a meal at #{@shop.name}?", new_meal_url(:shop_id => @shop.id)

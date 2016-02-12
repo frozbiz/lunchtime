@@ -1,9 +1,11 @@
 - show_user |= false
 
 .meal
-  = meal.order
-  = " by #{meal.user.name}" if (show_user)
-  = " at #{meal.shop.name}" 
+  b = meal.order
+  = " from "
+  = link_to meal.shop.name, shop_url(meal.shop)
+  = " eaten by " if (show_user)
+  = meal.user.name if (show_user)
   .stats
     = "$#{format('%0.02f', meal.price)} on #{meal.created_at.strftime("%h %d")}"
   -if user_signed_in? and current_user.id == meal.user.id

@@ -3,6 +3,9 @@ h1 All Restaurants
 .add-shop
   = link_to "Add a restaurant?", new_shop_url
 
+.shop-tag-cloud
+  - tag_cloud @tag_cloud_tags, %w(small-tag medium-tag large-tag xl-tag) do |tag, css_class|
+    = link_to tag.name, shops_url(:tag => tag.name), :class => css_class
 .shops
   - @shops.each do |s|
     = render partial: 'shared/shop', locals: {shop: s}

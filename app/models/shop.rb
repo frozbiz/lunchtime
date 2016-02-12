@@ -3,6 +3,9 @@ class Shop < ActiveRecord::Base
     belongs_to :user
     belongs_to :office
 
+    acts_as_taggable
+
+    scope :by_name, -> { order("name ASC") }
     before_save :attempt_to_calculate_distance
 
     ratyrate_rateable "quality"

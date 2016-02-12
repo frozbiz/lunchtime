@@ -1,20 +1,58 @@
-  h1 New Outing
+h1 New Outing
 
-  = form_for @outing, url: {action: "create"} do |f|
-    div
-      label Time
-      = f.text_field :departure, :value => "#{Time.now.in_time_zone.hour}:#{Time.now.in_time_zone.min + 30}"
+= form_for @outing, url: {action: "create"} do |f|
+  div
+    .time
+      #outing-time-display = "12:00"
+      = f.button " << ", :id => "way-earlier-button", :class => 'time-button'
+      = f.button " < ", :id => "earlier-button", :class => 'time-button'
+      = f.button " > ", :id => "later-button", :class => 'time-button'
+      = f.button " >> ", :id => "way-later-button", :class => 'time-button'
+    = f.hidden_field :departure, :value => "12:00"
+  br
+  div
+    = f.collection_select :shop_id, Shop.by_name.all, :id, :name, {:prompt => "Select a Restaurant", :selected => @prefill_shop_id}
+  br
+  div
+    label Comment
+  div
+    = f.text_area :comment, size: "30x5"
+  br
+  = f.hidden_field :user_id, :value => current_user.id
+  = f.hidden_field :outing_state, :value => "PROPOSED"
 
-    div
-      label Restaurant
-      = f.collection_select :shop_id, Shop.all, :id, :name, {:prompt => "Select a Restaurant", :selected => @prefill_shop_id}
+  .save-and-cancel
+    = f.submit "Create Outing"
 
-    div
-      label Comment
-      = f.text_area :comment
+javascript:
 
-    = f.hidden_field :user_id, :value => current_user.id
-    = f.hidden_field :outing_state, :value => "PROPOSED"
+  var alterTime = function(field, amount) {
+    time = field.html();
 
-    .save-and-cancel
-      = f.submit "Create Outing"
+    var hours = parseInt(time.split(":")[0]);
+    var minutes = parseInt(time.split(":")[1]);
+
+    minutes = minutes + amount;
+    if (minutes > 59) {
+      minutes = minutes - 60;
+      hours = hours + 1;
+    }
+    if (minutes < 0) {
+      minutes = minutes + 60;
+      hours = hours - 1;
+    }
+    if (hours > 23 || hours < 0)
+      return;
+
+    if (minutes < 10)
+      minutes = "0" + minutes;
+
+    field.html(hours + ":" + minutes);
+    $('#outing_departure').val(hours + ":" + minutes);
+  };
+
+  $('#way-earlier-button').click(function() { event.preventDefault(); alterTime($("#outing-time-display"), -15); });
+  $('#way-later-button').click(function() { event.preventDefault(); alterTime($("#outing-time-display"), 15); });
+  $('#earlier-button').click(function() { event.preventDefault(); alterTime($("#outing-time-display"), -5); });
+  $('#later-button').click(function() { event.preventDefault(); alterTime($("#outing-time-display"), 5); });
+

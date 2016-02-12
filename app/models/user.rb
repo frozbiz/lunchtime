@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   ratyrate_rater
 
+  validates_format_of :email, :with => /.*@sonos.com/, :message => "must be sonos.com"
+
 end
 
 class User::ParameterSanitizer < Devise::ParameterSanitizer
