@@ -6,3 +6,11 @@
 .shop { margin-bottom: 10px; }
 .shop span.gold-dollar-sign { font-size: larger; text-shadow: 0px 0px 3px black; color: gold; }
 .shop span.gray-dollar-sign { font-size: larger; text-shadow: 0px 0px 3px gray; color: gray; }
+.shop span.shop-tag { font-size: smaller; background-color: lightgray; outline: 1px solid ghostwhite; padding: 2px; }
+.shop span.shop-tag a { color: darkblue; text-decoration: none; text-shadow: 1px 1px 3px #505050; padding: 3px; }
+.shop-tag-cloud { width: 30% }
+.shop-tag-cloud a { background-color: lightgray; outline: 1px solid ghostwhite; color: darkblue; text-decoration: none; text-shadow: 1px 1px 3px #505050; padding: 2px; margin: 4px; }
+.shop-tag-cloud .small-tag { font-size: 0.8em; }
+.shop-tag-cloud .medium-tag { font-size: 1.0em; }
+.shop-tag-cloud .large-tag { font-size: 1.2em; }
+.shop-tag-cloud .xl-tag { font-size: 1.4em; }

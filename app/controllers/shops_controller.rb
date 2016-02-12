@@ -1,11 +1,20 @@
 class ShopsController < ApplicationController
 
 def index
-  if user_signed_in?
-    @shops = Shop.where(:office_id => current_user.office_id).order(distance_meters: :asc)
+  unless params[:tag].nil?
+    logger.info("tag is " + params[:tag])
+    @shops = Shop.tagged_with(params[:tag])
   else
-    @shops = Shop.all.order(distance_meters: :asc)
+    @shops = Shop.all
   end
+
+  if user_signed_in?
+    @shops = @shops.where(:office_id => current_user.office_id).order(distance_meters: :asc)
+  else
+    @shops = @shops.order(distance_meters: :asc)
+  end
+
+  @tag_cloud_tags = Shop.tag_counts.order(taggings_count: :desc)
 end
 
 def new
@@ -24,7 +33,7 @@ def create
 end
 
 def shop_params
-    params.require(:shop).permit(:user_id, :name, :address, :phone, :office_id)
+    params.require(:shop).permit(:user_id, :name, :address, :phone, :office_id, :tag_list)
 end
 
 def edit
