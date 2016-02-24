@@ -13,7 +13,6 @@ class Outing < ActiveRecord::Base
 
   before_create :add_creator_as_member
 
-
   def add_creator_as_member
     self.users << User.find(user_id)
   end
@@ -26,6 +25,10 @@ class Outing < ActiveRecord::Base
     elsif self.departure < Time.now.in_time_zone(self.shop.office.tz) + 5.minutes
       self.update_attributes(outing_state: :IMINENT)
     end
+  end
+
+  def done?
+    [:COMPLETE, :CANCELLED].include?(self.outing_state.to_sym)
   end
 
 end

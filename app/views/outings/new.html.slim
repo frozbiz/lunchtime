@@ -51,8 +51,8 @@ javascript:
     $('#outing_departure').val(hours + ":" + minutes);
   };
 
-  $('#way-earlier-button').click(function() { event.preventDefault(); alterTime($("#outing-time-display"), -15); });
-  $('#way-later-button').click(function() { event.preventDefault(); alterTime($("#outing-time-display"), 15); });
-  $('#earlier-button').click(function() { event.preventDefault(); alterTime($("#outing-time-display"), -5); });
-  $('#later-button').click(function() { event.preventDefault(); alterTime($("#outing-time-display"), 5); });
+  $('#way-earlier-button').click(function(event) { event.preventDefault(); alterTime($("#outing-time-display"), -15); });
+  $('#way-later-button').click(function(event) { event.preventDefault(); alterTime($("#outing-time-display"), 15); });
+  $('#earlier-button').click(function(event) { event.preventDefault(); alterTime($("#outing-time-display"), -5); });
+  $('#later-button').click(function(event) { event.preventDefault(); alterTime($("#outing-time-display"), 5); });
 

@@ -3,14 +3,37 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .shops { margin: 10px 20px; }
-.shop { margin-bottom: 10px; }
-.shop span.gold-dollar-sign { font-size: larger; text-shadow: 0px 0px 3px black; color: gold; }
-.shop span.gray-dollar-sign { font-size: larger; text-shadow: 0px 0px 3px gray; color: gray; }
-.shop span.shop-tag { font-size: smaller; background-color: lightgray; outline: 1px solid ghostwhite; padding: 2px; }
-.shop span.shop-tag a { color: darkblue; text-decoration: none; text-shadow: 1px 1px 3px #505050; padding: 3px; }
-.shop-tag-cloud { width: 30% }
-.shop-tag-cloud a { background-color: lightgray; outline: 1px solid ghostwhite; color: darkblue; text-decoration: none; text-shadow: 1px 1px 3px #505050; padding: 2px; margin: 4px; }
-.shop-tag-cloud .small-tag { font-size: 0.8em; }
-.shop-tag-cloud .medium-tag { font-size: 1.0em; }
-.shop-tag-cloud .large-tag { font-size: 1.2em; }
-.shop-tag-cloud .xl-tag { font-size: 1.4em; }
+.shop {
+  margin-bottom: 10px;
+  span.gold-dollar-sign {
+    font-size: larger;
+    text-shadow: 0px 0px 3px black;
+    color: gold;
+  }
+  span.gray-dollar-sign { 
+    font-size: larger;
+    text-shadow: 0px 0px 3px gray;
+    color: gray;
+  }
+  span.shop-tag { 
+    font-size: smaller;
+    background-color: lightgray;
+    outline: 1px solid ghostwhite;
+    padding: 2px 5px;
+    margin-right: 4px;
+    a { 
+      color: darkblue; 
+      text-decoration: none;
+      text-shadow: 1px 1px 3px #505050;
+      padding: 3px;
+    }
+  }
+}
+.shop-tag-cloud { 
+  width: 30%;
+  .small-tag { font-size: 0.8em; }
+  .medium-tag { font-size: 1.0em; }
+  .large-tag { font-size: 1.2em; }
+  .xl-tag { font-size: 1.4em; }
+  a { background-color: lightgray; outline: 1px solid ghostwhite; color: darkblue; text-decoration: none; text-shadow: 1px 1px 3px #505050; padding: 2px; margin: 4px; }
+}
