@@ -5,6 +5,9 @@
 .shops { margin: 10px 20px; }
 .shop {
   margin-bottom: 10px;
+  .shop-name {
+    font-size: 150%;
+  }
   span.gold-dollar-sign {
     font-size: larger;
     text-shadow: 0px 0px 3px black;

@@ -1,7 +1,7 @@
 .shop
   b = link_to shop_url(id: shop.id) do
-    .shop-name = "Name: #{shop.name}"
-  .shop-address = "Address: #{shop.address}"
+    .shop-name = shop.name
+  .shop-address = shop.address
   - unless shop.tag_list.empty?
     .tag-list
       - shop.tag_list.each do |tag|
@@ -32,4 +32,4 @@
   .user-meals
     - user_meals = shop.meals.where(:user => current_user).all
     .user-meals-count
-      = "You've eaten at #{shop.name} #{user_meals.size} times"
+      = "You've eaten here #{user_meals.size} times"

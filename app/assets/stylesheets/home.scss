@@ -15,7 +15,6 @@ body {
 }
 
 .header {
-  min-width: 600px;
   background: #303030;
   padding-top: 30px;
   margin-bottom: 20px;
@@ -65,7 +64,7 @@ body {
     .nav-item {
       display: inline-block;
       text-align: center;
-      width: 150px;
+      width: 30%;
       font-size: 150%;
     }
     .nav-item:hover { background: dimgray}
