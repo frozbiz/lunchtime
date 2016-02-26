@@ -59,3 +59,8 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  # heroku specific tools
+  gem 'rails_12factor'
+end
+
