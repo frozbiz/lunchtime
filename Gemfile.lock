@@ -100,6 +100,12 @@ GEM
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
     pg (0.18.4)
+    postmark (1.7.1)
+      json
+      rake
+    postmark-rails (0.12.0)
+      actionmailer (>= 3.0.0)
+      postmark (~> 1.7.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -189,6 +195,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   pg (~> 0.15)
+  postmark-rails (>= 0.10.0)
   rails (= 4.2.5.1)
   ratyrate
   sass-rails (~> 5.0)
