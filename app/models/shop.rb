@@ -6,6 +6,7 @@ class Shop < ActiveRecord::Base
     acts_as_taggable
 
     scope :by_name, -> { order("name ASC") }
+    scope :not_in, ->(set) { where("id not in (?)", set)}
     before_save :attempt_to_calculate_distance
 
     ratyrate_rateable "quality"

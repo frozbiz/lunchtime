@@ -9,11 +9,13 @@ def index
   end
 
   if user_signed_in?
-    @shops = @shops.where(:office_id => current_user.office_id).order(distance_meters: :asc)
-  else
-    @shops = @shops.order(distance_meters: :asc)
+    @shops = @shops.where(:office_id => current_user.office_id)
+    if params[:fresh] == 'true'
+      @shops = @shops.not_in(Meal.select(:shop_id).where(user_id: current_user.id).all.map(&:shop_id))
+    end
   end
 
+  @shops = @shops.order(distance_meters: :asc)
   @tag_cloud_tags = Shop.tag_counts.order(taggings_count: :desc)
 end
 
