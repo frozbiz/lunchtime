@@ -2,9 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.shops { margin: 10px 20px; }
+.add-shop { text-align: right; margin: 10px 0px; }
 .shop {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   .shop-name {
     font-size: 150%;
   }
@@ -18,25 +18,24 @@
     text-shadow: 0px 0px 3px gray;
     color: gray;
   }
-  span.shop-tag { 
-    font-size: smaller;
-    background-color: lightgray;
-    outline: 1px solid ghostwhite;
-    padding: 2px 5px;
-    margin-right: 4px;
-    a { 
-      color: darkblue; 
-      text-decoration: none;
-      text-shadow: 1px 1px 3px #505050;
-      padding: 3px;
-    }
-  }
+  span.shop-tag { font-size: smaller; }
+  a { text-decoration: none; color: inherit; }
 }
-.shop-tag-cloud { 
-  width: 30%;
+.shop-tag-cloud {
+  margin-bottom:10px;
+  a { text-decoration: none; color: inherit; }
   .small-tag { font-size: 0.8em; }
   .medium-tag { font-size: 1.0em; }
   .large-tag { font-size: 1.2em; }
-  .xl-tag { font-size: 1.4em; }
-  a { background-color: lightgray; outline: 1px solid ghostwhite; color: darkblue; text-decoration: none; text-shadow: 1px 1px 3px #505050; padding: 2px; margin: 4px; }
+  .xl-tag { font-size: 1.4em;}
+}
+span.shop-tag {
+  background-color: lightgray;
+  outline: 1px solid ghostwhite;
+  padding: 2px 4px;
+  margin: 0 2px 3px 0;
+  border-radius: 3px;
+  text-shadow: 1px 1px 3px #505050;
+  color: darkblue;
+  display:inline-block;
 }

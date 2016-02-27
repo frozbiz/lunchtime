@@ -46,6 +46,6 @@ br
   .shop-distance Distance: #{@shop.distance_text}
   .shop-walking-time Walking time: #{@shop.time_text}
   .shop-map
-    iframe width='600' height='450' frameborder='0' style='border:0; background-color:blue' src="https://www.google.com/maps/embed/v1/place?key=#{@gmaps_api_key}&q=#{@shop_addr}" allowfullscreen='true'
+    iframe width="100%" height='450' frameborder='0' style='border:0; background-color:blue' src="https://www.google.com/maps/embed/v1/place?key=#{@gmaps_api_key}&q=#{@shop_addr}" allowfullscreen='true'
   - if user_signed_in?
       .shop-created-by Restaurant entered by: #{@shop.user.name}

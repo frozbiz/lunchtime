@@ -13,7 +13,7 @@ h3 edit restaurant
       = f.text_field :address, :placeholder => "Restaurant address"
     .tag-entry
       label= "Tags (comma-separated) "
-      = f.text_field :tag_list
+      = f.text_field :tag_list, :value => @shop.tag_list.join(", ") 
     .shop-phone
       label= "Phone number: "
       = f.text_field :phone, :placeholder => "Restaurant phone number"
