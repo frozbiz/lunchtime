@@ -5,15 +5,16 @@
         = tag.name
     = " "
 
-.filter
-
-  = link_to shops_url({ tag: params[:tag], fresh: params[:fresh] != 'true' }) do
-    span.fresh-button
-      = params[:fresh] == 'true' ? "Show All Places" : "Show Only New Places"
+- if user_signed_in?
+  .filter
+    = link_to shops_url({ tag: params[:tag], fresh: params[:fresh] != 'true' }) do
+      span.fresh-button
+        = params[:fresh] == 'true' ? "Show All Places" : "Show Only New Places"
 hr
 
-.add-shop
-  = link_to "Add New", new_shop_url
+- if user_signed_in?
+  .add-shop
+    = link_to "Add New", new_shop_url
 
 .shops 
   - @shops.each do |s|
