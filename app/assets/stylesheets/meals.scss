@@ -3,4 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .meal-stats { margin-bottom:20px; }
-.meal { margin: 0 0 15px 10px; }
+.meal {
+  margin: 0 0 15px 10px;
+  .order { font-weight: bold; font-size: 110%; }
+  .description { font-style: italic; }
+}
