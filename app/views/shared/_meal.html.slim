@@ -7,7 +7,7 @@
   = " eaten by " if (show_user)
   = meal.user.name if (show_user)
   .stats
-    = "$#{format('%0.02f', meal.price)} on #{meal.created_at.strftime("%h %d")}"
+    = "#{format('$%0.02f', meal.price) if meal.price} on #{meal.created_at.strftime("%h %d")}"
   -if user_signed_in? and current_user.id == meal.user.id
     .rating
       = rating_for meal, "quality", :disable_after_rate => false, :half_show => true, :enable_half => true
