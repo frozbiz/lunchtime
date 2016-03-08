@@ -1,11 +1,11 @@
-- show_user |= false
-- show_shop |= false
+- show_user ||= false
+- hide_shop ||= false
 
 .meal
   .order
     = meal.order
   .about
-    - if (show_shop)
+    - if (!hide_shop)
       = " from "
       = link_to meal.shop.name, shop_url(meal.shop)
     - if (show_user)

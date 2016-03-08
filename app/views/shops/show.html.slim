@@ -45,6 +45,6 @@ h2 Location
   h2 Meals
   .meals
     - @shop.meals.each do |m|
-      = render partial: 'shared/meal', locals: {meal: m, show_user: true, show_shop: false}
+      = render partial: 'shared/meal', locals: {meal: m, show_user: true, hide_shop: true}
 
 .shop-created-by Restaurant entered by: #{@shop.user.name}
