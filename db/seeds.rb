@@ -15,7 +15,7 @@ Office.create(name: "Seattle", address: "1501 E Madison Street, Seattle, WA", tz
 Office.create(name: "Hilversum", address: "Schuttersweg 10, 1217 Hilversum, Netherlands", tz: "Europe/Amsterdam")
 #
 #
-User.new(name: "no one", office_id: Office.find_by(:name => "Boston-LCC").id, id: 9999, email: "noone@nowhere.com", password: "a3498flgweufbewfgweifb").save
+User.new(name: "no one", office_id: Office.find_by(:name => "Boston-LCC").id, id: 9999, email: "noone@sonos.com", password: "a3498flgweufbewfgweifb").save
 #
 #
 Shop.create(name: "Falafel King", address: "48 Winter Street, Boston, MA", office_id: Office.find_by(:name => "Boston-LCC").id, user_id: User.find_by(:name => "no one").id)
