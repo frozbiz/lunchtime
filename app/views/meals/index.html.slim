@@ -1,22 +1,11 @@
-h1 Welcome to Lunchtime
-h2 The best lunch organizing tool at Sonos.
+.meal-stats
+  = "Showing #{@meals.size} meals of #{@total_meals} logged."
+  - if user_signed_in?
+    .new-meal
+      = link_to( "Enter a meal", new_meal_url) 
 
-div.meals
-    - unless current_user
-        h3 Most recent meals
-        .global-total-meals
-            | there have been #{@meals.size} total meals
-        .global-recent-meals
-            | the last #{@recent_meals.size} meals were:
-    - else
-        h3 Your recent meals
-        .logged-in-user
-            | logged in user: [#{current_user.name}]
-        .user-total-meals
-            | you have #{@meals.size} total meals
-        .user-recent-meals
-            | your last #{@recent_meals.size} meals were:
+h2 = @limitless ? "All Meals" : "Recent Meals"
 
-    - @recent_meals.each do |meal|
-        .meal
-            = meal.order + " at " + meal.shop.name + " for $" + meal.price.to_s('F') + " rating " + meal.rating.to_s('F') + "/5 on " + meal.created_at.to_s()
+.meals
+  - @meals.each do |m|
+    = render partial: 'shared/meal', locals: {meal: m, show_user: true}

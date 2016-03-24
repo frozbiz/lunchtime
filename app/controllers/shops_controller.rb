@@ -1,7 +1,22 @@
 class ShopsController < ApplicationController
 
 def index
+  unless params[:tag].nil?
+    logger.info("tag is " + params[:tag])
+    @shops = Shop.tagged_with(params[:tag])
+  else
     @shops = Shop.all
+  end
+
+  if user_signed_in?
+    @shops = @shops.where(:office_id => current_user.office_id)
+    if params[:fresh] == 'true'
+      @shops = @shops.not_in(Meal.select(:shop_id).where(user_id: current_user.id).all.map(&:shop_id))
+    end
+  end
+
+  @shops = @shops.order(distance_meters: :asc)
+  @tag_cloud_tags = Shop.tag_counts.order(taggings_count: :desc)
 end
 
 def new
@@ -20,7 +35,7 @@ def create
 end
 
 def shop_params
-    params.require(:shop).permit(:user_id, :name, :address, :phone, :office_id)
+    params.require(:shop).permit(:user_id, :name, :address, :phone, :office_id, :tag_list)
 end
 
 def edit
@@ -38,6 +53,8 @@ end
 
 def show
     @shop = Shop.find(params[:id])
+    @shop_addr = Rack::Utils.escape(@shop.address)
+    @gmaps_api_key = "AIzaSyD9ZWdbd0MX0My0OjA4RmsCyj4OaE7pV4w"
 end
 
 end

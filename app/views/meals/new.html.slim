@@ -13,17 +13,14 @@ h2 The best lunch organizing tool at Sonos.
         .meal-price
             label Price: $
             = f.text_field :price, :placeholder => "0.00"
-        .meal-rating
-            label= "Rating: "
-            = f.text_field :rating, :placeholder => "0"
-            label= "/5"
         .meal-restaurant
             label= "Restaurant: "
-            = f.collection_select :shop_id, Shop.all, :id, :name, :include_blank => "Select a restaurant"
+            = f.collection_select :shop_id, Shop.all, :id, :name, {:prompt => "Select a restaurant", :selected => @current_shop_id}
         .meal-description
             .meal-description-label
                 label Description/comments
             .meal-description-field
                 = f.text_area :description
         = f.hidden_field :user_id, :value => current_user.id
+        .rating-remark You can rate this meal after saving it.
         = f.submit "Save Meal Record"

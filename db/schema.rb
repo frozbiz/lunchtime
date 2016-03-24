@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210230009) do
+ActiveRecord::Schema.define(version: 20160211221108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "average_caches", force: :cascade do |t|
+    t.integer  "rater_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "avg",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "meals", force: :cascade do |t|
     t.integer  "user_id"
@@ -34,21 +43,15 @@ ActiveRecord::Schema.define(version: 20160210230009) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "outing_states", force: :cascade do |t|
-    t.string "name"
-  end
-
   create_table "outings", force: :cascade do |t|
-    t.integer  "user_id",         null: false
-    t.integer  "shop_id",         null: false
-    t.datetime "departure",       null: false
+    t.integer  "user_id",      null: false
+    t.integer  "shop_id",      null: false
+    t.datetime "departure",    null: false
     t.string   "comment"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "outing_state_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "outing_state"
   end
-
-  add_index "outings", ["outing_state_id"], name: "index_outings_on_outing_state_id", using: :btree
 
   create_table "outings_users", id: false, force: :cascade do |t|
     t.integer "outing_id"
@@ -57,6 +60,39 @@ ActiveRecord::Schema.define(version: 20160210230009) do
 
   add_index "outings_users", ["outing_id"], name: "index_outings_users_on_outing_id", using: :btree
   add_index "outings_users", ["user_id"], name: "index_outings_users_on_user_id", using: :btree
+
+  create_table "overall_averages", force: :cascade do |t|
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "overall_avg",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rates", force: :cascade do |t|
+    t.integer  "rater_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "stars",         null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type", using: :btree
+  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id", using: :btree
+
+  create_table "rating_caches", force: :cascade do |t|
+    t.integer  "cacheable_id"
+    t.string   "cacheable_type"
+    t.float    "avg",            null: false
+    t.integer  "qty",            null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "user_id"
@@ -109,7 +145,6 @@ ActiveRecord::Schema.define(version: 20160210230009) do
   add_index "users", ["office_id"], name: "index_users_on_office_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "outings", "outing_states"
   add_foreign_key "shops", "offices"
   add_foreign_key "users", "offices"
 end

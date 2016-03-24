@@ -1,0 +1,24 @@
+- show_user ||= false
+- hide_shop ||= false
+
+.meal
+  .order
+    = meal.order
+  .about
+    - if (!hide_shop)
+      = " from "
+      = link_to meal.shop.name, shop_url(meal.shop)
+    - if (show_user)
+      = " eaten by #{meal.user.name}"
+
+  .stats
+    = "#{format('$%0.02f', meal.price) if meal.price} on #{meal.created_at.strftime("%h %d")}"
+  .description
+    = "\"#{meal.description}\""
+
+  -if user_signed_in? and current_user.id == meal.user.id
+    .rating
+      = rating_for meal, "quality", :disable_after_rate => false, :half_show => true, :enable_half => true
+  -if user_signed_in? and current_user.id == meal.user.id
+    .edit-meal
+      = link_to "Edit", edit_meal_url(id: meal.id)

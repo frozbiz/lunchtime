@@ -5,17 +5,29 @@ h1 The best lunch organizing tool at Sonos.
     = "To use LunchTime you must become a "
     = link_to("member", new_user_registration_url) + '.'
 - else
-  h2 
-    = "Welcome #{current_user.name} [#{current_user.email}]"
-  
-  h2 Are you hungry? Pick a place to go
-  p
-  = link_to "Plan an Outing", new_outing_url
 
-  h2 Current Outings
-  ul
+  p
+  - if @user_owned_outing.nil? and @user_member_outing.nil?
+    .no-outings
+      = "You have no current outings. "
+      = link_to "Plan an Outing", new_outing_url
+  - else
+    - if not @user_owned_outing.nil?
+      .owned-outing
+        = "You're organizing an Outing to #{@user_owned_outing.shop.name} at #{@user_owned_outing.departure.strftime(" %l:%M %P %Z")}. "
+      .owned-outing-membership
+        - if @user_member_outing.nil? or @user_member_outing.id != @user_owned_outing.id
+          = "#{@user_owned_outing.users.size} people are going. "
+          = link_to "Join this Outing?", join_outing_url(id: @user_owned_outing.id)
+        - else
+          = "You and #{@user_owned_outing.users.size - 1} other people are going. "
+          = link_to "Leave this Outing?", leave_outing_url(id: @user_owned_outing.id)
+    - if (not @user_member_outing.nil?) and (@user_owned_outing.nil? or @user_owned_outing.id != @user_member_outing.id)
+      .member-outing
+        = "You're joining an Outing to #{@user_member_outing.shop.name} at #{@user_member_outing.departure.strftime(" %l:%M %P")} with #{@user_member_outing.users.size() - 1} others. "
+        = link_to "Leave this Outing?", leave_outing_url(id: @user_member_outing.id)
+  br
+  h2 = "Upcoming Outings around #{@current_user.office.try(:name)}"
+  .outings
     - @outings.each do |o|
-      li
-        .name-time
-        = o.shop.name + o.departure.strftime(" @ %l:%M %P")
-        .comment = o.comment.to_s
+      = render partial: 'shared/outing', locals: {outing: o}

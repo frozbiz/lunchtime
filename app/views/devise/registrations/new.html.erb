@@ -27,7 +27,7 @@
   </div>
 
   <div class="field">
-    <label>Home office: </label>
+    <%= f.label :office %><br />
     <%= f.collection_select :office_id, Office.all, :id, :name, :include_blank => "Select home Sonos office" %>
   </div>
 

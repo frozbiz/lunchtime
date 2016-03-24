@@ -6,13 +6,19 @@ h3 edit restaurant
 / TODO: tags
 = form_for @shop, url: {action: "update"} do |f|
     .shop-name
-        = f.text_field :name, :placeholder => "Name"
+      label= "Name: "
+      = f.text_field :name, :placeholder => "Restaurant name"
     .shop-address
-        = f.text_field :address, :placeholder => "Address"
+      label= "Address: "
+      = f.text_field :address, :placeholder => "Restaurant address"
+    .tag-entry
+      label= "Tags (comma-separated) "
+      = f.text_field :tag_list, :value => @shop.tag_list.join(", ") 
     .shop-phone
-        = f.text_field :phone, :placeholder => "Phone number"
+      label= "Phone number: "
+      = f.text_field :phone, :placeholder => "Restaurant phone number"
     .shop-office
-        label= "Office: "
-        = f.collection_select :office_id, Office.all, :id, :name, :include_blank => "Select closest Sonos office"
+        label= "Closest Sonos Office: "
+        = f.collection_select :office_id, Office.all, :id, :name, {:prompt => "Select closest Sonos office", :selected => current_user.office_id || ''}
     = f.hidden_field :user_id, :value => current_user.id
     = f.submit "Save Restaurant Record"

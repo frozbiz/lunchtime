@@ -1,0 +1,3 @@
+h2 #{@meal.order} at #{@meal.shop.name} entered by #{@meal.user.name}
+
+= render partial: 'shared/meal', locals: {meal: @meal, show_user: true}

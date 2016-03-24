@@ -150,7 +150,7 @@
     <orderEntry type="library" scope="PROVIDED" name="http-form_data (v1.0.1, rbenv: 2.2.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="http_parser.rb (v0.6.0, rbenv: 2.2.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.7.0, rbenv: 2.2.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="jbuilder (v2.4.0, rbenv: 2.2.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="jbuilder (v2.4.1, rbenv: 2.2.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jquery-rails (v4.1.0, rbenv: 2.2.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="json (v1.8.3, rbenv: 2.2.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.0.3, rbenv: 2.2.4) [gem]" level="application" />
@@ -170,7 +170,8 @@
     <orderEntry type="library" scope="PROVIDED" name="rails-html-sanitizer (v1.0.3, rbenv: 2.2.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="railties (v4.2.5.1, rbenv: 2.2.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v10.5.0, rbenv: 2.2.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rdoc (v4.2.1, rbenv: 2.2.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ratyrate (v1.2.2.alpha, rbenv: 2.2.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rdoc (v4.2.2, rbenv: 2.2.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="responders (v2.1.1, rbenv: 2.2.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass (v3.4.21, rbenv: 2.2.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass-rails (v5.0.4, rbenv: 2.2.4) [gem]" level="application" />

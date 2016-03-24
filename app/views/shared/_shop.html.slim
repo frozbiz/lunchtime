@@ -1,0 +1,35 @@
+.shop
+  b = link_to shop_url(id: shop.id) do
+    .shop-name = shop.name
+  .shop-address = shop.address
+  - unless shop.tag_list.empty?
+    .tag-list
+      - shop.tag_list.each do |tag|
+        span.shop-tag
+          =link_to tag, shops_url(:tag => tag)
+        = " "
+  .global-rating
+    = rating_for shop, "quality", :disable_after_rate => true, :imdb_avg => true
+  .shop-price
+    - avg_price = shop.avg_price || 0.0
+    - if avg_price == 0.0
+      - price_title = "No meals recorded yet."
+    - else
+      - price_title = "$#{format('%0.02f', avg_price)}"
+    span title="#{price_title}"
+      - if avg_price == 0.0
+        span.gray-dollar-sign= "$$$"
+      - elsif shop.avg_price <= 6.0
+        span.gold-dollar-sign= "$"
+        span.gray-dollar-sign= "$$"
+      - elsif shop.avg_price <= 12.0
+        span.gold-dollar-sign= "$$"
+        span.gray-dollar-sign= "$"
+      - else
+        span.gold-dollar-sign= "$$$"
+  .shop-meals = "#{shop.meals.count} meals at #{shop.name} have been recorded"
+  / need to do some extra work to put the average price in a bucket and display the appropriate number of $ signs
+  .user-meals
+    - user_meals = shop.meals.where(:user => current_user).all
+    .user-meals-count
+      = "You've eaten here #{user_meals.size} times"

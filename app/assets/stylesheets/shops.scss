@@ -1,3 +1,54 @@
 // Place all the styles related to the shops controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.add-shop { text-align: right; margin-top: 10px; }
+.shops { margin-top:10px;}
+.shop {
+  margin-bottom: 15px;
+  .shop-name {
+    font-size: 150%;
+  }
+  span.gold-dollar-sign {
+    font-size: larger;
+    text-shadow: 0px 0px 3px black;
+    color: gold;
+  }
+  span.gray-dollar-sign { 
+    font-size: larger;
+    text-shadow: 0px 0px 3px gray;
+    color: gray;
+  }
+  span.shop-tag { font-size: smaller; }
+  a { text-decoration: none; color: inherit; }
+}
+.shop-tag-cloud {
+  margin-bottom:10px;
+  a { text-decoration: none; color: inherit; }
+  .small-tag { font-size: 0.8em; }
+  .medium-tag { font-size: 1.0em; }
+  .large-tag { font-size: 1.2em; }
+  .xl-tag { font-size: 1.4em;}
+}
+span.shop-tag {
+  background-color: lightgray;
+  outline: 1px solid ghostwhite;
+  padding: 2px 4px;
+  margin: 0 2px 3px 0;
+  border-radius: 3px;
+  text-shadow: 1px 1px 3px #505050;
+  color: darkblue;
+  display:inline-block;
+}
+.filter {
+  margin-bottom: 10px;
+  span.fresh-button {
+    text-shadow: 1px 1px 3px #505050;
+    color: darkblue;
+    background-color: lightgray;    
+    display:inline-block;
+    border-radius: 3px;
+    padding: 2px 4px;
+    a { text-decoration: none; color: inherit; }
+  }
+}
